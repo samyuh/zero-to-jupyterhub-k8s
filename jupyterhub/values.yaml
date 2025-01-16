@@ -423,12 +423,23 @@ singleuser:
     pullPolicy:
     pullSecrets: []
   startTimeout: 300
-  cpu:
-    limit:
-    guarantee:
-  memory:
-    limit:
-    guarantee: 1G
+  resources:
+    requests:
+      cpu:
+      memory: 1G
+    limits:
+      cpu:
+      memory:
+  podSecurityContext:
+    seccompProfile:
+      type: RuntimeDefault
+  containerSecurityContext:
+    readOnlyRootFilesystem: true
+    capabilities:
+      drop:
+        - ALL
+    seccompProfile:
+      type: RuntimeDefault
   extraResource:
     limits: {}
     guarantees: {}
